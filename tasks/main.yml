@@ -1,2 +1,25 @@
 ---
 # tasks file for monitoring-stack-pi
+- hosts: pi
+  become: yes
+
+  vars_prompt:
+    name: distribution
+    prompt: Choose distribution on which you are installing
+    default: arch
+
+  vars_files:
+    - ../vars/{{distribution}}.yml
+
+  tasks:
+    - pacman:
+        name: git, wget
+      when: package_manager == 'pacman'
+    
+    - apt:
+        name: git, wget
+      when: package_manager == 'apt'
+    
+    - yum:
+        name: git, wget
+      when: package_manager == 'yum' 
