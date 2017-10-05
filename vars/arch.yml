@@ -1,0 +1,3 @@
+---
+#Override Package Manager
+package_manager: pacman
