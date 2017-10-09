@@ -23,3 +23,8 @@
     - yum:
         name: git, wget
       when: package_manager == 'yum' 
+      
+
+
+- include: influxdb.yml
+- include: riemann.yml
