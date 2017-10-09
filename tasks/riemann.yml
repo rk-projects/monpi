@@ -1,0 +1,21 @@
+---
+# install riemann server and tools
+- hosts: pi
+  become: yes
+  
+  vars:
+    download_url: "https://github.com/riemann/riemann/releases/download/0.2.14/riemann-0.2.14.tar.bz2"
+    workdir: "/home/riemann/riemann-0.2.14.tar.bz2"
+    
+  vars_files:
+    - ../vars/riemann-conf.yml 
+  
+  tasks:
+    - user:
+        name: riemann
+        createhome: yes
+        shell: /bin/bash
+
+    - get_url:
+        url: "{{download_url}}"
+        dest: "{{workdir}}"
